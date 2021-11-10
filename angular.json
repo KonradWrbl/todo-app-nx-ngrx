@@ -95,6 +95,32 @@
       },
       "tags": []
     },
+    "todo-app-data-access": {
+      "projectType": "library",
+      "root": "libs/todo-app/data-access",
+      "sourceRoot": "libs/todo-app/data-access/src",
+      "prefix": "todo-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/todo-app/data-access"],
+          "options": {
+            "jestConfig": "libs/todo-app/data-access/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/todo-app/data-access/src/**/*.ts",
+              "libs/todo-app/data-access/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "todo-app-e2e": {
       "root": "apps/todo-app-e2e",
       "sourceRoot": "apps/todo-app-e2e/src",
@@ -123,6 +149,84 @@
       },
       "tags": [],
       "implicitDependencies": ["todo-app"]
+    },
+    "todo-app-feature-details": {
+      "projectType": "library",
+      "root": "libs/todo-app/feature-details",
+      "sourceRoot": "libs/todo-app/feature-details/src",
+      "prefix": "todo-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/todo-app/feature-details"],
+          "options": {
+            "jestConfig": "libs/todo-app/feature-details/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/todo-app/feature-details/src/**/*.ts",
+              "libs/todo-app/feature-details/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "todo-app-feature-list": {
+      "projectType": "library",
+      "root": "libs/todo-app/feature-list",
+      "sourceRoot": "libs/todo-app/feature-list/src",
+      "prefix": "todo-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/todo-app/feature-list"],
+          "options": {
+            "jestConfig": "libs/todo-app/feature-list/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/todo-app/feature-list/src/**/*.ts",
+              "libs/todo-app/feature-list/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
+    "todo-app-feature-shell": {
+      "projectType": "library",
+      "root": "libs/todo-app/feature-shell",
+      "sourceRoot": "libs/todo-app/feature-shell/src",
+      "prefix": "todo-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/todo-app/feature-shell"],
+          "options": {
+            "jestConfig": "libs/todo-app/feature-shell/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/todo-app/feature-shell/src/**/*.ts",
+              "libs/todo-app/feature-shell/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }
