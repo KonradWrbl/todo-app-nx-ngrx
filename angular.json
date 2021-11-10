@@ -227,6 +227,32 @@
         }
       },
       "tags": []
+    },
+    "todo-app-ui-list": {
+      "projectType": "library",
+      "root": "libs/todo-app/ui-list",
+      "sourceRoot": "libs/todo-app/ui-list/src",
+      "prefix": "todo-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/todo-app/ui-list"],
+          "options": {
+            "jestConfig": "libs/todo-app/ui-list/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/todo-app/ui-list/src/**/*.ts",
+              "libs/todo-app/ui-list/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     }
   }
 }
