@@ -27,6 +27,7 @@ export const initialState: State = todoAdapter.getInitialState({
 });
 
 const todoReducer = createReducer(
+  //init reducers
   initialState,
   on(TodoActions.init, (state) => ({ ...state, loaded: false, error: null })),
   on(TodoActions.loadTodoSuccess, (state, { todo }) =>
@@ -34,13 +35,25 @@ const todoReducer = createReducer(
   ),
   on(TodoActions.loadTodoFailure, (state, { error }) => ({ ...state, error })),
 
+  //create reducers
   on(TodoActions.createTodo, (state, { todo }) =>
     todoAdapter.addOne(todo, { ...state, loaded: false })
   ),
   on(TodoActions.createTodoSuccess, (state, { todo }) =>
     todoAdapter.setAll(todo, { ...state, loaded: true })
   ),
-  on(TodoActions.createTodoFail, (state, { error }) => ({ ...state, error }))
+  on(TodoActions.createTodoFail, (state, { error }) => ({ ...state, error })),
+
+  //remove reducers
+  on(TodoActions.removeTodo, (state, { id }) =>
+    todoAdapter.removeOne(`${id}`, { ...state, loaded: false })
+  ),
+
+  on(TodoActions.removeTodoSuccess, (state, { todo }) =>
+    todoAdapter.setAll(todo, { ...state, loaded: true })
+  ),
+
+  on(TodoActions.removeTodoFail, (state, { error }) => ({ ...state, error }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

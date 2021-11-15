@@ -32,6 +32,18 @@ export class TodoEffects {
     );
   });
 
+  removeTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoActions.removeTodo),
+      mergeMap((action) =>
+        this.todoService.removeTodo(action.id).pipe(
+          map((todo) => TodoActions.removeTodoSuccess({ todo })),
+          catchError((error) => of(TodoActions.removeTodoFail({ error })))
+        )
+      )
+    )
+  );
+
   constructor(
     private readonly actions$: Actions,
     private todoService: TodoService

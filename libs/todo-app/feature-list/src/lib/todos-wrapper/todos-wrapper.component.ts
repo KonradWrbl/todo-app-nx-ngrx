@@ -2,11 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import {
   createTodo,
   getAllTodo,
-  getSelected,
-  getTodoLoaded,
-  getTodoState,
-  init,
-  TodoEntity,
+  init, removeTodo,
+  TodoEntity
 } from '@todo-app/todo-app/data-access';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -38,6 +35,6 @@ export class TodosWrapperComponent implements OnInit {
   }
 
   deleteTodo(id: string | number) {
-    // this.todos = [...this.todos].filter(todo => todo.id !== id)
+    this.store.dispatch(removeTodo({ id }));
   }
 }

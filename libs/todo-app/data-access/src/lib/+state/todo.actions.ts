@@ -1,16 +1,12 @@
 import { createAction, props } from '@ngrx/store';
 import { TodoEntity } from './todo.models';
 
+//load todo
+
 export enum LoadTodoActionTypes {
   INIT = '[Todo/API] Load Todo Failure',
   LOAD_TODO_SUCCESS = '[Todo/API] Load Todo Success',
   LOAD_TODO_FAIL = '[Todo/API] Load Todo Failure',
-}
-
-export enum CreateTodoActionTypes {
-  CREATE_PIZZA = '[Todo Page] Create Pizza',
-  CREATE_PIZZA_SUCCESS = '[Todo Page] Create Pizza Success',
-  CREATE_PIZZA_FAIL = '[Todo Page] Create Pizza Fail',
 }
 
 export const init = createAction(LoadTodoActionTypes.INIT);
@@ -25,19 +21,48 @@ export const loadTodoFailure = createAction(
   props<{ error: any }>()
 );
 
-//create store
+//create todo
+
+export enum CreateTodoActionTypes {
+  CREATE_TODO = '[Todo Page] Create Todo',
+  CREATE_TODO_SUCCESS = '[Todo Page] Create Todo Success',
+  CREATE_TODO_FAIL = '[Todo Page] Create Todo Fail',
+}
 
 export const createTodo = createAction(
-  CreateTodoActionTypes.CREATE_PIZZA,
+  CreateTodoActionTypes.CREATE_TODO,
   props<{ todo: TodoEntity }>()
 );
 
 export const createTodoSuccess = createAction(
-  CreateTodoActionTypes.CREATE_PIZZA_SUCCESS,
+  CreateTodoActionTypes.CREATE_TODO_SUCCESS,
   props<{ todo: TodoEntity[] }>()
 );
 
 export const createTodoFail = createAction(
-  CreateTodoActionTypes.CREATE_PIZZA_FAIL,
+  CreateTodoActionTypes.CREATE_TODO_FAIL,
+  props<{ error: any }>()
+);
+
+//remove todo
+
+export enum RemoveTodoActionTypes {
+  REMOVE_TODO = '[Todo Page] Remove Todo',
+  REMOVE_TODO_SUCCESS = '[Todo Page] Remove Todo Success',
+  REMOVE_TODO_FAIL = '[Todo Page] Remove Todo Fail',
+}
+
+export const removeTodo = createAction(
+  RemoveTodoActionTypes.REMOVE_TODO,
+  props<{ id: string | number }>()
+);
+
+export const removeTodoSuccess = createAction(
+  RemoveTodoActionTypes.REMOVE_TODO_SUCCESS,
+  props<{ todo: TodoEntity[] }>()
+);
+
+export const removeTodoFail = createAction(
+  RemoveTodoActionTypes.REMOVE_TODO_FAIL,
   props<{ error: any }>()
 );
