@@ -10,6 +10,7 @@ import { TodoEffects } from './+state/todo.effects';
     CommonModule,
     StoreModule.forFeature(fromTodo.TODO_FEATURE_KEY, fromTodo.reducer),
     EffectsModule.forFeature([TodoEffects]),
+    //StoreModule.forRoot({count: counterReducer})
   ],
 })
 export class TodoAppDataAccessModule {}

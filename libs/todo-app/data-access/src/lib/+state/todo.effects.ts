@@ -1,27 +1,39 @@
 import { Injectable } from '@angular/core';
 import { createEffect, Actions, ofType } from '@ngrx/effects';
-import { fetch } from '@nrwl/angular';
 
 import * as TodoActions from './todo.actions';
-import * as TodoFeature from './todo.reducer';
+import { TodoService } from '../todo.service';
+import { catchError, map, mergeMap } from 'rxjs/operators';
+import { of } from 'rxjs';
 
 @Injectable()
 export class TodoEffects {
-  init$ = createEffect(() =>
-    this.actions$.pipe(
+  init$ = createEffect(() => {
+    return this.actions$.pipe(
       ofType(TodoActions.init),
-      fetch({
-        run: (action) => {
-          // Your custom service 'load' logic goes here. For now just return a success action...
-          return TodoActions.loadTodoSuccess({ todo: [] });
-        },
-        onError: (action, error) => {
-          console.error('Error', error);
-          return TodoActions.loadTodoFailure({ error });
-        },
-      })
-    )
-  );
+      mergeMap(() =>
+        this.todoService.todos$.pipe(
+          map((todo) => TodoActions.loadTodoSuccess({ todo })),
+          catchError((error) => of(TodoActions.loadTodoFailure({ error })))
+        )
+      )
+    );
+  });
 
-  constructor(private readonly actions$: Actions) {}
+  createTodo$ = createEffect(() => {
+    return this.actions$.pipe(
+      ofType(TodoActions.createTodo),
+      mergeMap((action) =>
+        this.todoService.createTodo(action.todo).pipe(
+          map((todo) => TodoActions.createTodoSuccess({ todo })),
+          catchError((error) => of(TodoActions.createTodoFail({ error })))
+        )
+      )
+    );
+  });
+
+  constructor(
+    private readonly actions$: Actions,
+    private todoService: TodoService
+  ) {}
 }

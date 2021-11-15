@@ -21,7 +21,9 @@ export const todoAdapter: EntityAdapter<TodoEntity> =
 
 export const initialState: State = todoAdapter.getInitialState({
   // set initial required properties
+  action: TodoActions,
   loaded: false,
+  error: null,
 });
 
 const todoReducer = createReducer(
@@ -30,7 +32,15 @@ const todoReducer = createReducer(
   on(TodoActions.loadTodoSuccess, (state, { todo }) =>
     todoAdapter.setAll(todo, { ...state, loaded: true })
   ),
-  on(TodoActions.loadTodoFailure, (state, { error }) => ({ ...state, error }))
+  on(TodoActions.loadTodoFailure, (state, { error }) => ({ ...state, error })),
+
+  on(TodoActions.createTodo, (state, { todo }) =>
+    todoAdapter.addOne(todo, { ...state, loaded: false })
+  ),
+  on(TodoActions.createTodoSuccess, (state, { todo }) =>
+    todoAdapter.setAll(todo, { ...state, loaded: true })
+  ),
+  on(TodoActions.createTodoFail, (state, { error }) => ({ ...state, error }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

@@ -1,0 +1,2 @@
+<button (click)='addTodo()'>Add</button>
+<todo-app-todo-item *ngFor='let todo of (todos$ | async)' [todo]='todo' (deleteTodo)='deleteTodo($event)'></todo-app-todo-item>
