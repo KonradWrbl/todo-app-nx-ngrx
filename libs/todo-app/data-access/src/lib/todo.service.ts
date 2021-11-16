@@ -1,42 +1,41 @@
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { TodoEntity } from '../../../data-access/src/';
 import { HttpClient } from '@angular/common/http';
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 // @ts-ignore
 import { APP_CONFIG } from '@todo-app/app-config';
+import { concatMap, tap } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  todos$: BehaviorSubject<TodoEntity[]> = new BehaviorSubject<TodoEntity[]>([
-    {
-      id: 0,
-      name: 'Hello Task',
-      description: 'This is hello task, try to create one of your own',
-      createdAt: new Date(),
-      deadline: new Date(new Date().setMonth(new Date().getMonth() + 1)),
-    },
-  ]);
+  // todos$: BehaviorSubject<TodoEntity[]> = new BehaviorSubject<TodoEntity[]>([
+  //   {
+  //     name: 'Hello Task',
+  //     description: 'This is hello task, try to create one of your own',
+  //     createdAt: new Date(),
+  //     deadline: new Date(new Date().setMonth(new Date().getMonth() + 1)),
+  //   },
+  // ]);
 
-  constructor(@Inject(APP_CONFIG) private appConfig: any) {}
+  todosUrl: string = this.appConfig.apiUrl + '/todos';
+
+  constructor(
+    @Inject(APP_CONFIG) private appConfig: { apiUrl: string; prod: boolean },
+    private http: HttpClient
+  ) {}
 
   getTodos(): Observable<TodoEntity[]> {
-    console.log(this.appConfig.apiURl);
-    //this.http.get(this.appConfig.apiUrl)
-    return this.todos$;
+    return this.http.get<TodoEntity[]>(this.todosUrl).pipe(tap(res => console.log(res)));
   }
 
   createTodo(todo: TodoEntity): Observable<TodoEntity[]> {
-    this.todos$.next([...this.todos$.getValue(), todo]);
-    return this.todos$;
+    return this.http.post<TodoEntity>(this.todosUrl, todo).pipe(concatMap(() => this.getTodos()))
   }
 
-  removeTodo(id: string | number): Observable<TodoEntity[]> {
-    const filteredTodos = this.todos$
-      .getValue()
-      .filter((todo) => todo.id !== id);
-    this.todos$.next(filteredTodos);
-    return this.todos$;
+  removeTodo(id: string | number): Observable<any> {
+    return this.http.delete(`${this.todosUrl}/${id}`)
   }
 }

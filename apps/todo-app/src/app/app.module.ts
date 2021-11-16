@@ -9,6 +9,7 @@ import { environment } from '../environments/environment';
 import { RouterModule, Routes } from '@angular/router';
 // @ts-ignore
 import { APP_CONFIG } from '@todo-app/app-config';
+import { HttpClientModule } from '@angular/common/http';
 
 const routes: Routes = [
   {
@@ -25,6 +26,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
+    HttpClientModule,
     StoreModule.forRoot(
       {},
       {

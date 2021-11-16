@@ -22,15 +22,13 @@ export class TodosWrapperComponent implements OnInit {
   ngOnInit(): void {
     this.store.dispatch(init());
     this.todos$ = this.store.pipe(select(getAllTodo));
-    console.log(this.todos$);
-    this.todos$.subscribe((res) => console.log(res));
+    this.todos$.subscribe(res => console.log(res));
   }
 
   addTodo() {
     const id = Math.round(Math.random() * 1000);
     const date = new Date();
     const todo: TodoEntity = {
-      id,
       name: 'TODO ' + id,
       description: 'DESCRIPTION' + id,
       createdAt: date,

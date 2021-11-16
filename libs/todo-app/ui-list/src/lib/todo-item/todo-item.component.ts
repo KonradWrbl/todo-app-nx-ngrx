@@ -11,6 +11,6 @@ export class TodoItemComponent {
   @Output() deleteTodo = new EventEmitter<number | string>();
 
   removeTodo() {
-    this.todo && this.deleteTodo.emit(this.todo?.id);
+    this.todo && this.deleteTodo.emit(this.todo?._id);
   }
 }

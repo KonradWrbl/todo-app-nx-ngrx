@@ -5,9 +5,12 @@ import { TodoEntity } from './todo.models';
 import { State, initialState, reducer } from './todo.reducer';
 
 describe('Todo Reducer', () => {
-  const createTodoEntity = (id: string, name = ''): TodoEntity => ({
-    id,
-    name: name || `name-${id}`,
+  const createTodoEntity = (_id: string, name = '', description = 'asd', createdAt = new Date(), deadline = new Date()): TodoEntity => ({
+    _id,
+    name: name || `name-${_id}`,
+    description,
+    createdAt,
+    deadline,
   });
 
   describe('valid Todo actions', () => {

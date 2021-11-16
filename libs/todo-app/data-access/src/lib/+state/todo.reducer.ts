@@ -17,7 +17,9 @@ export interface TodoPartialState {
 }
 
 export const todoAdapter: EntityAdapter<TodoEntity> =
-  createEntityAdapter<TodoEntity>();
+  createEntityAdapter<TodoEntity>({
+    selectId: (model: TodoEntity) => model._id as string
+  });
 
 export const initialState: State = todoAdapter.getInitialState({
   // set initial required properties
