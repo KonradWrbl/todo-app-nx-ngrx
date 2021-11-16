@@ -11,7 +11,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { APP_CONFIG } from '@todo-app/app-config';
 import { HttpClientModule } from '@angular/common/http';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     loadChildren: () =>

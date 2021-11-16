@@ -37,7 +37,7 @@ export class TodoEffects {
       ofType(TodoActions.removeTodo),
       mergeMap((action) =>
         this.todoService.removeTodo(action.id).pipe(
-          map((todo) => TodoActions.removeTodoSuccess({ todo })),
+          map(() => TodoActions.removeTodoSuccess()),
           catchError((error) => of(TodoActions.removeTodoFail({ error })))
         )
       )

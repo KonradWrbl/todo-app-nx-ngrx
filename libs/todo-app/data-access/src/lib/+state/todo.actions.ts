@@ -59,7 +59,6 @@ export const removeTodo = createAction(
 
 export const removeTodoSuccess = createAction(
   RemoveTodoActionTypes.REMOVE_TODO_SUCCESS,
-  props<{ todo: TodoEntity[] }>()
 );
 
 export const removeTodoFail = createAction(

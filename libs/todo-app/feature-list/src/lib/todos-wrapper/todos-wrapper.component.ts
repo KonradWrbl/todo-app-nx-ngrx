@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
 import {
   createTodo,
   getAllTodo,
@@ -13,26 +13,26 @@ import { Observable } from 'rxjs';
   selector: 'todo-app-todos-wrapper',
   templateUrl: './todos-wrapper.component.html',
   styleUrls: ['./todos-wrapper.component.scss'],
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodosWrapperComponent implements OnInit {
   todos$: Observable<TodoEntity[]> = new Observable<TodoEntity[]>();
-
   constructor(private store: Store<TodoEntity>) {}
 
   ngOnInit(): void {
     this.store.dispatch(init());
     this.todos$ = this.store.pipe(select(getAllTodo));
-    this.todos$.subscribe(res => console.log(res));
   }
 
   addTodo() {
     const id = Math.round(Math.random() * 1000);
     const date = new Date();
     const todo: TodoEntity = {
+      _id: `${id}`,
       name: 'TODO ' + id,
       description: 'DESCRIPTION' + id,
-      createdAt: date,
-      deadline: new Date(date.setMonth(date.getMonth()+1))
+      createdAt: date.toISOString(),
+      deadline: new Date(date.setMonth(date.getMonth() + 1)).toISOString(),
     };
     this.store.dispatch(createTodo({ todo }));
   }

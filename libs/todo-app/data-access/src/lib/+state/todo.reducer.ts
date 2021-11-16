@@ -51,9 +51,7 @@ const todoReducer = createReducer(
     todoAdapter.removeOne(`${id}`, { ...state, loaded: false })
   ),
 
-  on(TodoActions.removeTodoSuccess, (state, { todo }) =>
-    todoAdapter.setAll(todo, { ...state, loaded: true })
-  ),
+  on(TodoActions.removeTodoSuccess, (state) => ({ ...state, loaded: true })),
 
   on(TodoActions.removeTodoFail, (state, { error }) => ({ ...state, error }))
 );

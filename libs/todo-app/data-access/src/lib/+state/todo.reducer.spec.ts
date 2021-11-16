@@ -5,7 +5,7 @@ import { TodoEntity } from './todo.models';
 import { State, initialState, reducer } from './todo.reducer';
 
 describe('Todo Reducer', () => {
-  const createTodoEntity = (_id: string, name = '', description = 'asd', createdAt = new Date(), deadline = new Date()): TodoEntity => ({
+  const createTodoEntity = (_id: string, name = '', description = 'asd', createdAt = '', deadline = ''): TodoEntity => ({
     _id,
     name: name || `name-${_id}`,
     description,
@@ -16,8 +16,8 @@ describe('Todo Reducer', () => {
   describe('valid Todo actions', () => {
     it('loadTodoSuccess should return the list of known Todo', () => {
       const todo = [
-        createTodoEntity('PRODUCT-AAA'),
-        createTodoEntity('PRODUCT-zzz'),
+        createTodoEntity('TODO-aaa'),
+        createTodoEntity('TODO-zzz'),
       ];
       const action = TodoActions.loadTodoSuccess({ todo });
 
@@ -26,6 +26,21 @@ describe('Todo Reducer', () => {
       expect(result.loaded).toBe(true);
       expect(result.ids.length).toBe(2);
     });
+
+    it('createTodoSuccess should return the list of Todo', () => {
+      const todo = [
+        createTodoEntity('TODO-aaa'),
+        createTodoEntity('TODO-bbb'),
+        createTodoEntity('TODO-zzz'),
+      ]
+
+      const action = TodoActions.createTodoSuccess({todo});
+
+      const result: State = reducer(initialState, action);
+
+      expect(result.loaded).toBe(true);
+      expect(result.ids.length).toBe(3)
+    })
   });
 
   describe('unknown action', () => {
