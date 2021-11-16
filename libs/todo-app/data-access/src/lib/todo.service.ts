@@ -1,19 +1,29 @@
-import { Injectable } from '@angular/core';
-import { TodoEntity } from '@todo-app/todo-app/data-access';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Inject, Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
+import { TodoEntity } from '../../../data-access/src/';
+import { HttpClient } from '@angular/common/http';
+// @ts-ignore
+import { APP_CONFIG } from '@todo-app/app-config';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
   todos$: BehaviorSubject<TodoEntity[]> = new BehaviorSubject<TodoEntity[]>([
-    { id: 0, name: 'hello' },
-    { id: 1, name: 'oooo' },
+    {
+      id: 0,
+      name: 'Hello Task',
+      description: 'This is hello task, try to create one of your own',
+      createdAt: new Date(),
+      deadline: new Date(new Date().setMonth(new Date().getMonth() + 1)),
+    },
   ]);
 
-  constructor() {}
+  constructor(@Inject(APP_CONFIG) private appConfig: any) {}
 
   getTodos(): Observable<TodoEntity[]> {
+    console.log(this.appConfig.apiURl);
+    //this.http.get(this.appConfig.apiUrl)
     return this.todos$;
   }
 

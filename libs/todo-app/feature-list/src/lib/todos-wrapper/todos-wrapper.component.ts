@@ -2,8 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import {
   createTodo,
   getAllTodo,
-  init, removeTodo,
-  TodoEntity
+  init,
+  removeTodo,
+  TodoEntity,
 } from '@todo-app/todo-app/data-access';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -27,9 +28,13 @@ export class TodosWrapperComponent implements OnInit {
 
   addTodo() {
     const id = Math.round(Math.random() * 1000);
+    const date = new Date();
     const todo: TodoEntity = {
       id,
       name: 'TODO ' + id,
+      description: 'DESCRIPTION' + id,
+      createdAt: date,
+      deadline: new Date(date.setMonth(date.getMonth()+1))
     };
     this.store.dispatch(createTodo({ todo }));
   }

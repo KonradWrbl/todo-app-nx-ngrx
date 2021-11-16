@@ -27,7 +27,8 @@
       "@todo-app/todo-app/feature-shell": [
         "libs/todo-app/feature-shell/src/index.ts"
       ],
-      "@todo-app/todo-app/ui-list": ["libs/todo-app/ui-list/src/index.ts"]
+      "@todo-app/todo-app/ui-list": ["libs/todo-app/ui-list/src/index.ts"],
+      "@todo-app/app-config": ["libs/app-config/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

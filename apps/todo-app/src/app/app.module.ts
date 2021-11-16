@@ -7,6 +7,8 @@ import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { RouterModule, Routes } from '@angular/router';
+// @ts-ignore
+import { APP_CONFIG } from '@todo-app/app-config';
 
 const routes: Routes = [
   {
@@ -36,7 +38,12 @@ const routes: Routes = [
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
   ],
-  providers: [],
+  providers: [
+    {
+      provide: APP_CONFIG,
+      useValue: environment,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
