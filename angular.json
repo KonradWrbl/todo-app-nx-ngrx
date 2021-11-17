@@ -95,6 +95,32 @@
       },
       "tags": []
     },
+    "todo-app-core": {
+      "projectType": "library",
+      "root": "libs/todo-app/core",
+      "sourceRoot": "libs/todo-app/core/src",
+      "prefix": "todo-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/todo-app/core"],
+          "options": {
+            "jestConfig": "libs/todo-app/core/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/todo-app/core/src/**/*.ts",
+              "libs/todo-app/core/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "todo-app-data-access": {
       "projectType": "library",
       "root": "libs/todo-app/data-access",

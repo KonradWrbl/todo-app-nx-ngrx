@@ -17,7 +17,9 @@ export interface TodoPartialState {
 }
 
 export const todoAdapter: EntityAdapter<TodoEntity> =
-  createEntityAdapter<TodoEntity>();
+  createEntityAdapter<TodoEntity>({
+    selectId: (model: TodoEntity) => model._id as string
+  });
 
 export const initialState: State = todoAdapter.getInitialState({
   // set initial required properties
@@ -29,7 +31,7 @@ export const initialState: State = todoAdapter.getInitialState({
 const todoReducer = createReducer(
   //init reducers
   initialState,
-  on(TodoActions.init, (state) => ({ ...state, loaded: false, error: null })),
+  on(TodoActions.init, (state) => ({ ...state, loaded: false})),
   on(TodoActions.loadTodoSuccess, (state, { todo }) =>
     todoAdapter.setAll(todo, { ...state, loaded: true })
   ),
@@ -49,9 +51,7 @@ const todoReducer = createReducer(
     todoAdapter.removeOne(`${id}`, { ...state, loaded: false })
   ),
 
-  on(TodoActions.removeTodoSuccess, (state, { todo }) =>
-    todoAdapter.setAll(todo, { ...state, loaded: true })
-  ),
+  on(TodoActions.removeTodoSuccess, (state) => ({ ...state, loaded: true })),
 
   on(TodoActions.removeTodoFail, (state, { error }) => ({ ...state, error }))
 );

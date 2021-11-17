@@ -4,11 +4,14 @@ import * as TodoSelectors from './todo.selectors';
 
 describe('Todo Selectors', () => {
   const ERROR_MSG = 'No Error Available';
-  const getTodoId = (it: TodoEntity) => it.id;
-  const createTodoEntity = (id: string, name = '') =>
+  const getTodoId = (it: TodoEntity) => it._id;
+  const createTodoEntity = (_id: string, name = '', description = '', createdAt = '', deadline = '') =>
     ({
-      id,
-      name: name || `name-${id}`,
+      _id,
+      name: name || `name-${_id}`,
+      description,
+      createdAt,
+      deadline,
     } as TodoEntity);
 
   let state: TodoPartialState;

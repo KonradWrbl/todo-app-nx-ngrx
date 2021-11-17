@@ -5,10 +5,12 @@ import { AppComponent } from './app.component';
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
-import { environment } from '../environments/environment';
 import { RouterModule, Routes } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { TodoAppCoreModule } from '@todo-app/todo-app/core';
+import { environment } from '../environments/environment';
 
-const routes: Routes = [
+export const routes: Routes = [
   {
     path: '',
     loadChildren: () =>
@@ -23,6 +25,7 @@ const routes: Routes = [
   imports: [
     BrowserModule,
     RouterModule.forRoot(routes),
+    HttpClientModule,
     StoreModule.forRoot(
       {},
       {
@@ -35,8 +38,8 @@ const routes: Routes = [
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
+    TodoAppCoreModule,
   ],
-  providers: [],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

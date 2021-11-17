@@ -1,32 +1,34 @@
-import { Injectable } from '@angular/core';
-import { TodoEntity } from '@todo-app/todo-app/data-access';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Inject, Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
+import { TodoEntity } from '../../../data-access/src/';
+import { HttpClient } from '@angular/common/http';
+import { concatMap, } from 'rxjs/operators';
+import { TodoAppCoreModule } from '@todo-app/todo-app/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  todos$: BehaviorSubject<TodoEntity[]> = new BehaviorSubject<TodoEntity[]>([
-    { id: 0, name: 'hello' },
-    { id: 1, name: 'oooo' },
-  ]);
+  readonly url: string = 'https://crudcrud.com/api/faad46c423e54e8ab1a9630113737dac'
+  readonly todosUrl: string = this.url + '/todos';
 
-  constructor() {}
+  constructor(
+    @Inject(TodoAppCoreModule) private appConfig: { apiUrl: string; prod: boolean },
+    private http: HttpClient
+  ) {}
 
   getTodos(): Observable<TodoEntity[]> {
-    return this.todos$;
-  }
+    return this.http
+      .get<TodoEntity[]>(this.todosUrl)}
 
   createTodo(todo: TodoEntity): Observable<TodoEntity[]> {
-    this.todos$.next([...this.todos$.getValue(), todo]);
-    return this.todos$;
+    const {_id, ...rest} = todo;
+    return this.http
+      .post<TodoEntity>(this.todosUrl, rest)
+      .pipe(concatMap(() => this.getTodos()));
   }
 
-  removeTodo(id: string | number): Observable<TodoEntity[]> {
-    const filteredTodos = this.todos$
-      .getValue()
-      .filter((todo) => todo.id !== id);
-    this.todos$.next(filteredTodos);
-    return this.todos$;
+  removeTodo(id: string | number): Observable<void> {
+    return this.http.delete<void>(`${this.todosUrl}/${id}`);
   }
 }
