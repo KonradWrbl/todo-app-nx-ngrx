@@ -9,7 +9,7 @@ import { TodoAppCoreModule } from '@todo-app/todo-app/core';
   providedIn: 'root',
 })
 export class TodoService {
-  readonly url: string = 'https://crudcrud.com/api/faad46c423e54e8ab1a9630113737dac'
+  readonly url: string = 'https://crudcrud.com/api/6977866838a340dcb513716d8f66169c'
   readonly todosUrl: string = this.url + '/todos';
 
   constructor(
