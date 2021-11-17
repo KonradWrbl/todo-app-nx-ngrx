@@ -1,9 +1,10 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
-import { Subject } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { takeUntil } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
-import { getSelected, getSelectedById, getTodoLoaded, init, selectEntity } from '@todo-app/todo-app/data-access';
+import { getAllTodo, getSelected, init, selectTodoById, TodoEntity } from '@todo-app/todo-app/data-access';
+
 
 @Component({
   selector: 'todo-app-todo-details',
@@ -12,13 +13,17 @@ import { getSelected, getSelectedById, getTodoLoaded, init, selectEntity } from 
 })
 export class TodoDetailsComponent implements OnInit, OnDestroy {
   onDestroy: Subject<void> = new Subject();
+  todo$: Observable<TodoEntity | undefined> = new Observable<TodoEntity | undefined>();
 
-  constructor(private route: ActivatedRoute, private store: Store) {}
+  constructor(private route: ActivatedRoute, private store: Store<TodoEntity>) {}
 
   ngOnInit(): void {
+
     this.route.params.pipe(takeUntil(this.onDestroy)).subscribe((res) => {
       console.log(res);
       this.store.dispatch(init());
+      //this.todo$ = this.store.pipe(select(selectTodoById(res.id)))
+      this.todo$.subscribe(res => console.log(res))
     });
   }
 
