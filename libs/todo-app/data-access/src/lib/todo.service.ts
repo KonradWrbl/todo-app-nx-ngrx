@@ -1,28 +1,25 @@
 import { Inject, Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, of } from 'rxjs';
+import { Observable } from 'rxjs';
 import { TodoEntity } from '../../../data-access/src/';
 import { HttpClient } from '@angular/common/http';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { APP_CONFIG } from '@todo-app/app-config';
-import { concatMap, tap } from 'rxjs/operators';
+import { concatMap, } from 'rxjs/operators';
+import { TodoAppCoreModule } from '@todo-app/todo-app/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TodoService {
-  readonly todosUrl: string = this.appConfig.apiUrl + '/todos';
+  readonly url: string = 'https://crudcrud.com/api/faad46c423e54e8ab1a9630113737dac'
+  readonly todosUrl: string = this.url + '/todos';
 
   constructor(
-    @Inject(APP_CONFIG) private appConfig: { apiUrl: string; prod: boolean },
+    @Inject(TodoAppCoreModule) private appConfig: { apiUrl: string; prod: boolean },
     private http: HttpClient
   ) {}
 
   getTodos(): Observable<TodoEntity[]> {
     return this.http
-      .get<TodoEntity[]>(this.todosUrl)
-      .pipe(tap((res) => console.log(res)));
-  }
+      .get<TodoEntity[]>(this.todosUrl)}
 
   createTodo(todo: TodoEntity): Observable<TodoEntity[]> {
     const {_id, ...rest} = todo;
