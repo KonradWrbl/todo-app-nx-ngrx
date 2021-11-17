@@ -38,9 +38,7 @@ export const routes: Routes = [
     ),
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
-  ],
-  providers: [
-    {provide: TodoAppCoreModule}
+    TodoAppCoreModule,
   ],
   bootstrap: [AppComponent],
 })
