@@ -2,7 +2,7 @@ import { InjectionToken, NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { environment } from '../environments/environment';
 
-const APP_CONFIG = new InjectionToken('Application config')
+export const APP_CONFIG = new InjectionToken('Application config')
 
 @NgModule({
   imports: [CommonModule],

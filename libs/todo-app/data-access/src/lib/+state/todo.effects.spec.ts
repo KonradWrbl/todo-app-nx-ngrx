@@ -8,13 +8,9 @@ import { Observable } from 'rxjs';
 
 import * as TodoActions from './todo.actions';
 import { TodoEffects } from './todo.effects';
-// eslint-disable-next-line @typescript-eslint/ban-ts-comment
-// @ts-ignore
-import { APP_CONFIG } from '@todo-app/app-config';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
-import { environment } from '../../../../../../apps/todo-app/src/environments/environment';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TodoService } from '../todo.service';
+// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { TodoEntity } from '@todo-app/todo-app/data-access';
 
 describe('TodoEffects', () => {
@@ -36,7 +32,6 @@ describe('TodoEffects', () => {
     TestBed.configureTestingModule({
       imports: [NxModule.forRoot(), HttpClientTestingModule],
       providers: [
-        { provide: APP_CONFIG, useValue: environment },
         TodoEffects,
         provideMockActions(() => actions),
         provideMockStore(),

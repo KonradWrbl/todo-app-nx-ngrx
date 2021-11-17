@@ -7,7 +7,7 @@ import { SharedMaterialModule } from '@todo-app/shared/material';
 const routes: Routes = [{ path: '', component: TodoItemComponent }];
 
 @NgModule({
-  imports: [CommonModule, SharedMaterialModule],
+  imports: [CommonModule, SharedMaterialModule, RouterModule],
   declarations: [TodoItemComponent],
   exports: [TodoItemComponent],
 })
