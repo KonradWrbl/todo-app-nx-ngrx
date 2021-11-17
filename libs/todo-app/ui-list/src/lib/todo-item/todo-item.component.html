@@ -1,4 +1,7 @@
-<div>
-  <h1>{{todo?.name}}</h1>
-  <button (click)='removeTodo()'>Remove</button>
+<div class="item">
+  <h2 class="title mat-title">{{ todo?.name }}</h2>
+  <button class="button" mat-icon-button color="warn" (click)="removeTodo()">
+    <mat-icon> delete </mat-icon>
+  </button>
 </div>
+<mat-divider></mat-divider>

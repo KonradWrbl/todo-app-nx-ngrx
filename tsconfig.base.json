@@ -16,6 +16,7 @@
     "baseUrl": ".",
     "paths": {
       "@todo-app/app-config": ["libs/app-config/index.ts"],
+      "@todo-app/shared/material": ["libs/shared/material/src/index.ts"],
       "@todo-app/todo-app/core": ["libs/todo-app/core/src/index.ts"],
       "@todo-app/todo-app/data-access": [
         "libs/todo-app/data-access/src/index.ts"
