@@ -40,9 +40,7 @@ export const routes: Routes = [
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     BrowserAnimationsModule,
-  ],
-  providers: [
-    {provide: TodoAppCoreModule}
+    TodoAppCoreModule
   ],
   bootstrap: [AppComponent],
 })
