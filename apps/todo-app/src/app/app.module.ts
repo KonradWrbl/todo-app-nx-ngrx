@@ -10,6 +10,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { TodoAppCoreModule } from '@todo-app/todo-app/core';
 import { environment } from '../environments/environment';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatNativeDateModule } from '@angular/material/core';
 
 export const routes: Routes = [
   {
@@ -40,7 +41,8 @@ export const routes: Routes = [
     EffectsModule.forRoot([]),
     !environment.production ? StoreDevtoolsModule.instrument() : [],
     BrowserAnimationsModule,
-    TodoAppCoreModule
+    TodoAppCoreModule,
+    MatNativeDateModule
   ],
   bootstrap: [AppComponent],
 })

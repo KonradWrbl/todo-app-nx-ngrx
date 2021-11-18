@@ -36,4 +36,6 @@ export const getSelected = createSelector(
 );
 
 export const selectTodoById = (id: string) =>
-  createSelector(selectEntities, (entities) => entities[id]);
+  createSelector(getTodoEntities, (entities) => {
+    return entities[id];
+  });

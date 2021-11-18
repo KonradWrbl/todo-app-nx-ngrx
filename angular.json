@@ -205,6 +205,32 @@
       "tags": [],
       "implicitDependencies": ["todo-app"]
     },
+    "todo-app-feature-add-edit-todo": {
+      "projectType": "library",
+      "root": "libs/todo-app/feature-add-edit-todo",
+      "sourceRoot": "libs/todo-app/feature-add-edit-todo/src",
+      "prefix": "todo-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/todo-app/feature-add-edit-todo"],
+          "options": {
+            "jestConfig": "libs/todo-app/feature-add-edit-todo/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/todo-app/feature-add-edit-todo/src/**/*.ts",
+              "libs/todo-app/feature-add-edit-todo/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "todo-app-feature-details": {
       "projectType": "library",
       "root": "libs/todo-app/feature-details",

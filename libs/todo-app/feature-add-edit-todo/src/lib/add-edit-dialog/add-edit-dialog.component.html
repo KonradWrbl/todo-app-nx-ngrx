@@ -1,0 +1,36 @@
+<h1 mat-dialog-title>{{data ? "Edit Todo" : "Add Todo"}}</h1>
+<div mat-dialog-content>
+  <form [formGroup]="form" class="form">
+    <mat-form-field>
+      <mat-label>Name:</mat-label>
+      <input matInput placeholder="My new Todo" [formControl]="name" />
+      <mat-error *ngIf="name.hasError('required')">Name is required</mat-error>
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Description:</mat-label>
+      <textarea
+        matInput
+        placeholder="I have to do sth ..."
+        [formControl]="description"
+      ></textarea>
+      <mat-error *ngIf="name.hasError('required')"
+        >Description is required</mat-error
+      >
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Choose a deadline</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [formControl]="deadline"
+        [min]="minDate"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-raised-button color="warn" mat-dialog-close>Cancel</button>
+  <button mat-raised-button color="primary" (click)='onSubmit()'>{{data ? 'Edit todo' : 'Add todo'}}</button>
+</div>

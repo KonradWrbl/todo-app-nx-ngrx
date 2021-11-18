@@ -4,6 +4,7 @@ import { TodoDetailsComponent } from './todo-details/todo-details.component';
 import { RouterModule, Routes } from '@angular/router';
 import { TodoAppDataAccessModule } from '@todo-app/todo-app/data-access';
 import { SharedMaterialModule } from '@todo-app/shared/material';
+import { TodoAppFeatureAddEditTodoModule } from '@todo-app/todo-app/feature-add-edit-todo';
 
 const routes: Routes = [
   {
@@ -13,9 +14,13 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [CommonModule, RouterModule.forChild(routes), TodoAppDataAccessModule, SharedMaterialModule],
-  declarations: [
-    TodoDetailsComponent
+  imports: [
+    CommonModule,
+    RouterModule.forChild(routes),
+    TodoAppDataAccessModule,
+    SharedMaterialModule,
+    TodoAppFeatureAddEditTodoModule,
   ],
+  declarations: [TodoDetailsComponent],
 })
 export class TodoAppFeatureDetailsModule {}

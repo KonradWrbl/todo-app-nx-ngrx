@@ -3,8 +3,9 @@ import { createEffect, Actions, ofType } from '@ngrx/effects';
 
 import * as TodoActions from './todo.actions';
 import { TodoService } from '../todo.service';
-import { catchError, map, mergeMap, tap } from 'rxjs/operators';
+import { catchError, exhaustMap, map, mergeMap, tap } from 'rxjs/operators';
 import { of } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Injectable()
 export class TodoEffects {
@@ -35,7 +36,7 @@ export class TodoEffects {
   removeTodo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.removeTodo),
-      mergeMap((action) =>
+      exhaustMap((action) =>
         this.todoService.removeTodo(action.id).pipe(
           map(() => TodoActions.removeTodoSuccess()),
           catchError((error) => of(TodoActions.removeTodoFail({ error })))
@@ -44,8 +45,28 @@ export class TodoEffects {
     )
   );
 
+  editTodo$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoActions.editTodo),
+      mergeMap((action) =>
+        this.todoService.editTodo(action.todo).pipe(
+          map(() => TodoActions.editTodoSuccess()),
+          catchError((error) => of(TodoActions.editTodoFail({ error })))
+        )
+      )
+    )
+  );
+
+  removeTodoSuccess$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(TodoActions.removeTodoSuccess),
+      tap(() => this.router.navigate(['/']))
+    )
+  );
+
   constructor(
     private readonly actions$: Actions,
-    private todoService: TodoService
+    private todoService: TodoService,
+    private router: Router
   ) {}
 }

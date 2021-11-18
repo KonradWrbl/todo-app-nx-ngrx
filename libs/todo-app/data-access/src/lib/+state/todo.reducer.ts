@@ -18,7 +18,7 @@ export interface TodoPartialState {
 
 export const todoAdapter: EntityAdapter<TodoEntity> =
   createEntityAdapter<TodoEntity>({
-    selectId: (model: TodoEntity) => model._id as string
+    selectId: (model: TodoEntity) => model._id as string,
   });
 
 export const initialState: State = todoAdapter.getInitialState({
@@ -31,7 +31,7 @@ export const initialState: State = todoAdapter.getInitialState({
 const todoReducer = createReducer(
   //init reducers
   initialState,
-  on(TodoActions.init, (state) => ({ ...state, loaded: false})),
+  on(TodoActions.init, (state) => ({ ...state, loaded: false })),
   on(TodoActions.loadTodoSuccess, (state, { todo }) =>
     todoAdapter.setAll(todo, { ...state, loaded: true })
   ),
@@ -53,7 +53,19 @@ const todoReducer = createReducer(
 
   on(TodoActions.removeTodoSuccess, (state) => ({ ...state, loaded: true })),
 
-  on(TodoActions.removeTodoFail, (state, { error }) => ({ ...state, error }))
+  on(TodoActions.removeTodoFail, (state, { error }) => ({ ...state, error })),
+
+  //edit reducers
+  on(TodoActions.editTodo, (state, { todo }) =>
+    todoAdapter.updateOne(
+      { changes: todo, id: todo._id },
+      { ...state, loaded: false }
+    )
+  ),
+
+  on(TodoActions.editTodoSuccess, (state) => ({ ...state, loaded: true })),
+
+  on(TodoActions.editTodoFail, (state, { error }) => ({ ...state, error }))
 );
 
 export function reducer(state: State | undefined, action: Action) {

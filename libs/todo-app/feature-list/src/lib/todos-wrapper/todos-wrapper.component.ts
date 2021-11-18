@@ -8,6 +8,8 @@ import {
 } from '@todo-app/todo-app/data-access';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
+import { MatDialog } from '@angular/material/dialog';
+import { AddEditDialogComponent } from '../../../../feature-add-edit-todo/src/lib/add-edit-dialog/add-edit-dialog.component';
 
 @Component({
   selector: 'todo-app-todos-wrapper',
@@ -17,7 +19,7 @@ import { Observable } from 'rxjs';
 })
 export class TodosWrapperComponent implements OnInit {
   todos$: Observable<TodoEntity[]> = new Observable<TodoEntity[]>();
-  constructor(private store: Store<TodoEntity>) {}
+  constructor(private store: Store<TodoEntity>, private dialog: MatDialog) {}
 
   ngOnInit(): void {
     this.store.dispatch(init());
@@ -25,16 +27,13 @@ export class TodosWrapperComponent implements OnInit {
   }
 
   addTodo() {
-    const id = Math.round(Math.random() * 1000);
-    const date = new Date();
-    const todo: TodoEntity = {
-      _id: `${id}`,
-      name: 'TODO ' + id,
-      description: 'DESCRIPTION' + id,
-      createdAt: date.toISOString(),
-      deadline: new Date(date.setMonth(date.getMonth() + 1)).toISOString(),
-    };
-    this.store.dispatch(createTodo({ todo }));
+    this.dialog.open(AddEditDialogComponent);
+  }
+
+  editTodo(todo: TodoEntity) {
+    this.dialog.open(AddEditDialogComponent, {
+      data: todo,
+    });
   }
 
   deleteTodo(id: string | number) {

@@ -1,10 +1,10 @@
 <div class="item" [routerLink]='todo?._id || "/"'>
   <h2 class="title mat-title">{{ todo?.name }}</h2>
   <div class='buttons'>
-    <button class="button" mat-icon-button color="primary" (click)="removeTodo()">
+    <button class="button" mat-icon-button color="primary" (click)="editTodoHandler($event)">
       <mat-icon> edit </mat-icon>
     </button>
-    <button class="button" mat-icon-button color="warn" (click)="removeTodo()">
+    <button class="button" mat-icon-button color="warn" (click)="deleteTodoHandler($event)">
       <mat-icon> delete </mat-icon>
     </button>
   </div>

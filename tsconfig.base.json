@@ -21,6 +21,9 @@
       "@todo-app/todo-app/data-access": [
         "libs/todo-app/data-access/src/index.ts"
       ],
+      "@todo-app/todo-app/feature-add-edit-todo": [
+        "libs/todo-app/feature-add-edit-todo/src/index.ts"
+      ],
       "@todo-app/todo-app/feature-details": [
         "libs/todo-app/feature-details/src/index.ts"
       ],

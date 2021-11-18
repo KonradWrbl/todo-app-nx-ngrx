@@ -1,9 +1,24 @@
-<mat-card>
-  <mat-card-title>Todo title</mat-card-title>
-  <mat-card-subtitle>Todo description</mat-card-subtitle>
+<button mat-icon-button routerLink="/">
+  <mat-icon>chevron_left</mat-icon>
+</button>
+<mat-card *ngIf="todo$ | async as todo">
+  <div class="header">
+    <mat-card-title>
+      {{ todo.name }}
+    </mat-card-title>
+    <button mat-icon-button color="primary" (click)="editTodo(todo)">
+      <mat-icon>edit</mat-icon>
+    </button>
+  </div>
+  <mat-card-subtitle *ngIf="dateDiff | async as date"
+    >Left: {{ date.days }} days, {{ date.hours }} hours,
+    {{ date.minutes }} minutes</mat-card-subtitle
+  >
+  <mat-card-content>{{ todo.description }}</mat-card-content>
   <mat-card-actions align="end">
-    <button mat-raised-button color='primary'>Done</button>
-    <button mat-raised-button color='warn'>Remove</button>
+    <button mat-raised-button color="warn" (click)="deleteTodo(todo._id)">
+      Remove
+    </button>
+    <button mat-raised-button color="primary" (click)="deleteTodo(todo._id)">Done</button>
   </mat-card-actions>
 </mat-card>
-
