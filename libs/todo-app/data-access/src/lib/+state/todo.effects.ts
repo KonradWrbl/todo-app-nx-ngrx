@@ -36,7 +36,7 @@ export class TodoEffects {
   removeTodo$ = createEffect(() =>
     this.actions$.pipe(
       ofType(TodoActions.removeTodo),
-      exhaustMap((action) =>
+      mergeMap((action) =>
         this.todoService.removeTodo(action.id).pipe(
           map(() => TodoActions.removeTodoSuccess()),
           catchError((error) => of(TodoActions.removeTodoFail({ error })))
@@ -54,13 +54,6 @@ export class TodoEffects {
           catchError((error) => of(TodoActions.editTodoFail({ error })))
         )
       )
-    )
-  );
-
-  removeTodoSuccess$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(TodoActions.removeTodoSuccess),
-      tap(() => this.router.navigate(['/']))
     )
   );
 

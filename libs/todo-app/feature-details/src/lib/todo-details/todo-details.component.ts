@@ -72,6 +72,9 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
 
   deleteTodo(id: string | number) {
     this.store.dispatch(removeTodo({ id }));
+    this.store
+      .pipe(select(getTodoLoaded), takeUntil(this.onDestroy))
+      .subscribe((res) => res && this.router.navigate(['/']));
   }
 
   getDateDifference(startDate: Date, endDate: Date) {
