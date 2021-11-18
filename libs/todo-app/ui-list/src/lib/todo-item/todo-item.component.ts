@@ -9,8 +9,15 @@ import { TodoEntity } from '@todo-app/todo-app/data-access';
 export class TodoItemComponent {
   @Input() todo?: TodoEntity;
   @Output() deleteTodo = new EventEmitter<number | string>();
+  @Output() editTodo = new EventEmitter<void>();
 
-  removeTodo() {
+  deleteTodoHandler(event: MouseEvent) {
+    event.stopPropagation()
     this.todo && this.deleteTodo.emit(this.todo?._id);
+  }
+
+  editTodoHandler(event: MouseEvent) {
+    event.stopPropagation()
+    this.todo && this.editTodo.emit()
   }
 }

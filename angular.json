@@ -1,6 +1,32 @@
 {
   "version": 1,
   "projects": {
+    "shared-material": {
+      "projectType": "library",
+      "root": "libs/shared/material",
+      "sourceRoot": "libs/shared/material/src",
+      "prefix": "todo-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/shared/material"],
+          "options": {
+            "jestConfig": "libs/shared/material/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/shared/material/src/**/*.ts",
+              "libs/shared/material/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
+    },
     "todo-app": {
       "projectType": "application",
       "root": "apps/todo-app",
@@ -21,7 +47,10 @@
               "apps/todo-app/src/favicon.ico",
               "apps/todo-app/src/assets"
             ],
-            "styles": ["apps/todo-app/src/styles.scss"],
+            "styles": [
+              "./node_modules/@angular/material/prebuilt-themes/deeppurple-amber.css",
+              "apps/todo-app/src/styles.scss"
+            ],
             "scripts": []
           },
           "configurations": {
@@ -175,6 +204,32 @@
       },
       "tags": [],
       "implicitDependencies": ["todo-app"]
+    },
+    "todo-app-feature-add-edit-todo": {
+      "projectType": "library",
+      "root": "libs/todo-app/feature-add-edit-todo",
+      "sourceRoot": "libs/todo-app/feature-add-edit-todo/src",
+      "prefix": "todo-app",
+      "architect": {
+        "test": {
+          "builder": "@nrwl/jest:jest",
+          "outputs": ["coverage/libs/todo-app/feature-add-edit-todo"],
+          "options": {
+            "jestConfig": "libs/todo-app/feature-add-edit-todo/jest.config.js",
+            "passWithNoTests": true
+          }
+        },
+        "lint": {
+          "builder": "@nrwl/linter:eslint",
+          "options": {
+            "lintFilePatterns": [
+              "libs/todo-app/feature-add-edit-todo/src/**/*.ts",
+              "libs/todo-app/feature-add-edit-todo/src/**/*.html"
+            ]
+          }
+        }
+      },
+      "tags": []
     },
     "todo-app-feature-details": {
       "projectType": "library",

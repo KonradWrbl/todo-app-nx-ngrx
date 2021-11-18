@@ -1,5 +1,6 @@
 import { createAction, props } from '@ngrx/store';
 import { TodoEntity } from './todo.models';
+import { Update } from '@ngrx/entity';
 
 //load todo
 
@@ -65,3 +66,25 @@ export const removeTodoFail = createAction(
   RemoveTodoActionTypes.REMOVE_TODO_FAIL,
   props<{ error: any }>()
 );
+
+export enum RemoveTodoActionTypes {
+  EDIT_TODO = '[Todo Page] Edit Todo',
+  EDIT_TODO_SUCCESS = '[Todo Page] Edit Todo Success',
+  EDIT_TODO_FAIL = '[Todo Page] Edit Todo Fail',
+}
+
+export const editTodo = createAction(
+  RemoveTodoActionTypes.EDIT_TODO,
+  props<{ todo: TodoEntity }>()
+);
+
+export const editTodoSuccess = createAction(
+  RemoveTodoActionTypes.EDIT_TODO_SUCCESS,
+);
+
+export const editTodoFail = createAction(
+  RemoveTodoActionTypes.EDIT_TODO_FAIL,
+  props<{ error: any }>()
+);
+
+

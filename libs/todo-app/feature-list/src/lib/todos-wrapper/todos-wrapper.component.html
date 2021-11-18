@@ -1,2 +1,21 @@
-<button (click)='addTodo()'>Add</button>
-<todo-app-todo-item *ngFor='let todo of (todos$ | async)' [todo]='todo' (deleteTodo)='deleteTodo($event)'></todo-app-todo-item>
+<div class="list">
+  <mat-action-list *ngIf="(todos$ | async)?.length; else noTodos">
+    <todo-app-todo-item
+      mat-list-item
+      *ngFor="let todo of todos$ | async"
+      [todo]="todo"
+      (deleteTodo)="deleteTodo($event)"
+      (editTodo)="editTodo(todo)"
+    ></todo-app-todo-item>
+  </mat-action-list>
+</div>
+
+<button mat-button class="button" color="primary" (click)="addTodo()">
+  Add
+</button>
+
+<ng-template #noTodos>
+  <mat-action-list>
+    <mat-list-item>No todos</mat-list-item>
+  </mat-action-list>
+</ng-template>
