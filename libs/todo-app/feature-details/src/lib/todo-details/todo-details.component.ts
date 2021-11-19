@@ -40,7 +40,7 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.store
-      .pipe(select(getTodoLoaded), take(1), takeUntil(this.onDestroy))
+      .pipe(select(getTodoLoaded), take(1))
       .subscribe((loaded) => {
         !loaded && this.store.dispatch(init());
       });
