@@ -53,6 +53,7 @@ export class AddEditDialogComponent implements OnDestroy {
   }
 
   onSubmit(): void {
+    console.log(this.form.controls)
     if (this.form.valid) {
       const todo = {
         _id: this.data ? this.data._id : `${Math.floor(Math.random() * 10000)}`,

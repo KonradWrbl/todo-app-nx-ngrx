@@ -18,7 +18,7 @@ export const loadTodoSuccess = createAction(
 
 export const loadTodoFailure = createAction(
   LoadTodoActionTypes.LOAD_TODO_FAIL,
-  props<{ error: void }>()
+  props<{ error: string | undefined }>()
 );
 
 //create todo
@@ -41,7 +41,7 @@ export const createTodoSuccess = createAction(
 
 export const createTodoFail = createAction(
   CreateTodoActionTypes.CREATE_TODO_FAIL,
-  props<{ error: void }>()
+  props<{ error: string | undefined }>()
 );
 
 //remove todo
@@ -63,7 +63,7 @@ export const removeTodoSuccess = createAction(
 
 export const removeTodoFail = createAction(
   RemoveTodoActionTypes.REMOVE_TODO_FAIL,
-  props<{ error: void }>()
+  props<{ error: string | undefined }>()
 );
 
 export enum RemoveTodoActionTypes {
@@ -83,7 +83,7 @@ export const editTodoSuccess = createAction(
 
 export const editTodoFail = createAction(
   RemoveTodoActionTypes.EDIT_TODO_FAIL,
-  props<{ error: void }>()
+  props<{ error: string | undefined }>()
 );
 
 

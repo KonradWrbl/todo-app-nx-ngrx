@@ -4,7 +4,7 @@
     <mat-form-field>
       <mat-label>Name:</mat-label>
       <input matInput placeholder="My new Todo" [formControl]="name" />
-      <mat-error *ngIf="name.hasError('required')">Name is required</mat-error>
+      <mat-error *ngIf="form.controls.name.errors?.required">Name is required</mat-error>
     </mat-form-field>
     <mat-form-field>
       <mat-label>Description:</mat-label>
