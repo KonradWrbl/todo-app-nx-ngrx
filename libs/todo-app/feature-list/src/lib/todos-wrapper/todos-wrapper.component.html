@@ -1,9 +1,9 @@
 <div class="list">
   <div mat-subheader>To do:</div>
-  <mat-action-list *ngIf="(todos$ | async)?.length; else noTodos">
+  <mat-action-list *ngIf="(undoneTodos$ | async)?.length; else noTodos">
     <todo-app-todo-item
       mat-list-item
-      *ngFor="let todo of todos$ | async"
+      *ngFor="let todo of undoneTodos$ | async"
       [todo]="todo"
       (deleteTodo)="deleteTodo($event)"
       (editTodo)="editTodo(todo)"
@@ -18,10 +18,10 @@
 
 <div class="list">
   <div mat-subheader>Done:</div>
-  <mat-action-list *ngIf="(todos$ | async)?.length; else noTodos">
+  <mat-action-list *ngIf="(doneTodos$ | async)?.length; else noTodos">
     <todo-app-todo-item
       mat-list-item
-      *ngFor="let todo of todos$ | async"
+      *ngFor="let todo of doneTodos$ | async"
       [todo]="todo"
       (deleteTodo)="deleteTodo($event)"
       (editTodo)="editTodo(todo)"

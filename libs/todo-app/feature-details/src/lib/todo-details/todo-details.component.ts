@@ -4,11 +4,12 @@ import { Observable, Subject } from 'rxjs';
 import { switchMap, take, takeUntil } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import {
+  editTodo,
   getTodoLoaded,
   init,
   removeTodo,
   selectTodoById,
-  TodoEntity,
+  TodoEntity
 } from '@todo-app/todo-app/data-access';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEditDialogComponent } from '@todo-app/todo-app/feature-add-edit-todo';
@@ -75,6 +76,10 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     this.store
       .pipe(select(getTodoLoaded), takeUntil(this.onDestroy))
       .subscribe((res) => res && this.router.navigate(['/']));
+  }
+
+  switchTodoStatus(todo: TodoEntity) {
+    this.store.dispatch(editTodo({ todo: { ...todo, done: !todo.done } }));
   }
 
   getDateDifference(startDate: Date, endDate: Date) {
