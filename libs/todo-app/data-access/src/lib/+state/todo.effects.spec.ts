@@ -10,7 +10,6 @@ import * as TodoActions from './todo.actions';
 import { TodoEffects } from './todo.effects';
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { TodoService } from '../todo.service';
-// eslint-disable-next-line @nrwl/nx/enforce-module-boundaries
 import { TodoEntity } from '@todo-app/todo-app/data-access';
 
 describe('TodoEffects', () => {
