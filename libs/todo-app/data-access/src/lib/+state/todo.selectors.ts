@@ -1,10 +1,12 @@
 import { createFeatureSelector, createSelector } from '@ngrx/store';
 import { TODO_FEATURE_KEY, State, todoAdapter } from './todo.reducer';
+import { TodoEntity } from './todo.models';
+import { Dictionary } from '@ngrx/entity';
 
 // Lookup the 'Todo' feature state managed by NgRx
 export const getTodoState = createFeatureSelector<State>(TODO_FEATURE_KEY);
 
-const { selectAll, selectEntities } = todoAdapter.getSelectors();
+const { selectAll, selectEntities, selectIds } = todoAdapter.getSelectors();
 
 export const getTodoLoaded = createSelector(
   getTodoState,
@@ -39,3 +41,11 @@ export const selectTodoById = (id: string) =>
   createSelector(getTodoEntities, (entities) => {
     return entities[id];
   });
+
+export const getDone = createSelector(getAllTodo, (todo) =>
+  todo.filter((el) => el.done)
+);
+
+export const getUndone = createSelector(getAllTodo, (todo) =>
+  todo.filter((el) => !el.done)
+);

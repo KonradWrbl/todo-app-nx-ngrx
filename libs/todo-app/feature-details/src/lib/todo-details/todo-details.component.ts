@@ -4,11 +4,12 @@ import { Observable, Subject } from 'rxjs';
 import { switchMap, take, takeUntil } from 'rxjs/operators';
 import { select, Store } from '@ngrx/store';
 import {
+  editTodo,
   getTodoLoaded,
   init,
   removeTodo,
   selectTodoById,
-  TodoEntity,
+  TodoEntity
 } from '@todo-app/todo-app/data-access';
 import { MatDialog } from '@angular/material/dialog';
 import { AddEditDialogComponent } from '@todo-app/todo-app/feature-add-edit-todo';
@@ -30,6 +31,8 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     TodoEntity | undefined
   >();
   dateDiff: Subject<DateDiffModel> = new Subject<DateDiffModel>();
+
+  readMoreVisibility: boolean = false;
 
   constructor(
     private route: ActivatedRoute,
@@ -77,6 +80,14 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
       .subscribe((res) => res && this.router.navigate(['/']));
   }
 
+  switchTodoStatus(todo: TodoEntity) {
+    this.store.dispatch(editTodo({ todo: { ...todo, done: !todo.done } }));
+  }
+
+  switchReadMoreVisibility() {
+    this.readMoreVisibility = !this.readMoreVisibility;
+  }
+
   getDateDifference(startDate: Date, endDate: Date) {
     const diff = endDate.getTime() - startDate.getTime();
     const days = Math.floor(diff / (60 * 60 * 24 * 1000));
@@ -89,4 +100,6 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.onDestroy.next();
   }
+
+
 }

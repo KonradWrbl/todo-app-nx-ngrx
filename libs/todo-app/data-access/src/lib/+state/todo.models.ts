@@ -7,4 +7,5 @@ export interface TodoEntity {
   description: string;
   createdAt: string;
   deadline: string;
+  done: boolean;
 }

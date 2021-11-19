@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, Routes } from '@angular/router';
+import { TodoDetailsGuard } from './guards/todo-details/todo-details.guard';
 
 const routes: Routes = [
   {
@@ -17,6 +18,7 @@ const routes: Routes = [
       import('@todo-app/todo-app/feature-details').then(
         (m) => m.TodoAppFeatureDetailsModule
       ),
+    canActivate: [TodoDetailsGuard]
   },
 ];
 

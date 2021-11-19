@@ -1,7 +1,8 @@
-import { ChangeDetectionStrategy, Component, OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import {
-  createTodo,
   getAllTodo,
+  getDone,
+  getUndone,
   init,
   removeTodo,
   TodoEntity,
@@ -9,7 +10,7 @@ import {
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { MatDialog } from '@angular/material/dialog';
-import { AddEditDialogComponent } from '../../../../feature-add-edit-todo/src/lib/add-edit-dialog/add-edit-dialog.component';
+import { AddEditDialogComponent } from '@todo-app/todo-app/feature-add-edit-todo';
 
 @Component({
   selector: 'todo-app-todos-wrapper',
@@ -17,13 +18,14 @@ import { AddEditDialogComponent } from '../../../../feature-add-edit-todo/src/li
   styleUrls: ['./todos-wrapper.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class TodosWrapperComponent implements OnInit {
-  todos$: Observable<TodoEntity[]> = new Observable<TodoEntity[]>();
-  constructor(private store: Store<TodoEntity>, private dialog: MatDialog) {}
+export class TodosWrapperComponent {
+  doneTodos$: Observable<TodoEntity[] | undefined>
+  undoneTodos$: Observable<TodoEntity[] | undefined>
 
-  ngOnInit(): void {
+  constructor(private store: Store<TodoEntity>, private dialog: MatDialog) {
     this.store.dispatch(init());
-    this.todos$ = this.store.pipe(select(getAllTodo));
+    this.doneTodos$ = this.store.pipe(select(getDone));
+    this.undoneTodos$ = this.store.pipe(select(getUndone));
   }
 
   addTodo() {

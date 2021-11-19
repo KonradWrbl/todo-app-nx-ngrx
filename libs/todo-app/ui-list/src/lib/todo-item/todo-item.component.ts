@@ -10,6 +10,7 @@ export class TodoItemComponent {
   @Input() todo?: TodoEntity;
   @Output() deleteTodo = new EventEmitter<number | string>();
   @Output() editTodo = new EventEmitter<void>();
+  @Output() markTodoAsDone = new EventEmitter<void>()
 
   deleteTodoHandler(event: MouseEvent) {
     event.stopPropagation()
@@ -20,4 +21,5 @@ export class TodoItemComponent {
     event.stopPropagation()
     this.todo && this.editTodo.emit()
   }
+
 }
