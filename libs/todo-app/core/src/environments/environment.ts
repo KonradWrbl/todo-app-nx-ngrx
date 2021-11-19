@@ -4,12 +4,13 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'https://crudcrud.com/api/50077a83e3fe490da8e18bbeee9d8df0'
+  apiUrl: 'https://crudcrud.com/api/b7c047e56c854760b8e145a1d178cfff'
 };
 
 /*
  * For easier debugging in development mode, you can import the following file
  * to ignore zone related error stack frames such as `zone.run`, `zoneDelegate.invokeTask`.
+ *
  *
  * This import should be commented out in production mode because it will have a negative impact
  * on performance if an error is thrown.

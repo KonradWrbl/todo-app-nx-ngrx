@@ -5,7 +5,7 @@ import * as TodoSelectors from './todo.selectors';
 describe('Todo Selectors', () => {
   const ERROR_MSG = 'No Error Available';
   const getTodoId = (it: TodoEntity) => it._id;
-  const createTodoEntity = (_id: string, name = '', description = '', createdAt = '', deadline = '') =>
+  const createTodoEntity = (_id: string, name = '', description = '', createdAt = '', deadline = '', done = false) =>
     ({
       _id,
       name: name || `name-${_id}`,

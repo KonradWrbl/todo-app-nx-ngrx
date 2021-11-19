@@ -1,4 +1,5 @@
 <div class="list">
+  <div mat-subheader>To do:</div>
   <mat-action-list *ngIf="(todos$ | async)?.length; else noTodos">
     <todo-app-todo-item
       mat-list-item
@@ -13,6 +14,22 @@
 <button mat-button class="button" color="primary" (click)="addTodo()">
   Add
 </button>
+
+
+<div class="list">
+  <div mat-subheader>Done:</div>
+  <mat-action-list *ngIf="(todos$ | async)?.length; else noTodos">
+    <todo-app-todo-item
+      mat-list-item
+      *ngFor="let todo of todos$ | async"
+      [todo]="todo"
+      (deleteTodo)="deleteTodo($event)"
+      (editTodo)="editTodo(todo)"
+    ></todo-app-todo-item>
+  </mat-action-list>
+</div>
+
+
 
 <ng-template #noTodos>
   <mat-action-list>

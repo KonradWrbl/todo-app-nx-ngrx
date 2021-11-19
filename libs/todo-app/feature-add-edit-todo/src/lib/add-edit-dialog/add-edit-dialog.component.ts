@@ -60,6 +60,7 @@ export class AddEditDialogComponent implements OnDestroy {
         description: this.description.value,
         deadline: this.deadline.value,
         createdAt: new Date().toString(),
+        done: false
       } as TodoEntity;
 
       this.data
