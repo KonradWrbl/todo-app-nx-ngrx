@@ -6,7 +6,7 @@ import { Dictionary } from '@ngrx/entity';
 // Lookup the 'Todo' feature state managed by NgRx
 export const getTodoState = createFeatureSelector<State>(TODO_FEATURE_KEY);
 
-const { selectAll, selectEntities } = todoAdapter.getSelectors();
+const { selectAll, selectEntities, selectIds } = todoAdapter.getSelectors();
 
 export const getTodoLoaded = createSelector(
   getTodoState,

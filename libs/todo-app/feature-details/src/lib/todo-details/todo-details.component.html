@@ -17,13 +17,26 @@
     >Left: {{ date.days }} days, {{ date.hours }} hours,
     {{ date.minutes }} minutes</mat-card-subtitle
   >
-  <mat-card-content>{{ todo.description }}</mat-card-content>
+  <mat-card-content>{{
+    todo.description.length > 600 && !readMoreVisibility
+      ? (todo.description | slice: 0:600) + '..'
+      : todo.description
+  }}</mat-card-content>
+  <button
+    *ngIf="todo.description.length > 600"
+    mat-button
+    color="primary"
+    class="button button--read-more"
+    (click)="switchReadMoreVisibility()"
+  >
+    {{!readMoreVisibility ? "Read more" : "Read less"}}
+  </button>
   <mat-card-actions align="end">
     <button mat-raised-button color="warn" (click)="deleteTodo(todo._id)">
       Remove
     </button>
     <button mat-raised-button color="primary" (click)="switchTodoStatus(todo)">
-      {{ todo.done ? 'Undone' : 'Done'}}
+      {{ todo.done ? 'Undone' : 'Done' }}
     </button>
   </mat-card-actions>
 </mat-card>

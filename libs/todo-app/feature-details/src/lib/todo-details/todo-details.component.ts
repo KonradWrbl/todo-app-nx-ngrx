@@ -32,6 +32,8 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
   >();
   dateDiff: Subject<DateDiffModel> = new Subject<DateDiffModel>();
 
+  readMoreVisibility: boolean = false;
+
   constructor(
     private route: ActivatedRoute,
     private store: Store<TodoEntity>,
@@ -82,6 +84,10 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     this.store.dispatch(editTodo({ todo: { ...todo, done: !todo.done } }));
   }
 
+  switchReadMoreVisibility() {
+    this.readMoreVisibility = !this.readMoreVisibility;
+  }
+
   getDateDifference(startDate: Date, endDate: Date) {
     const diff = endDate.getTime() - startDate.getTime();
     const days = Math.floor(diff / (60 * 60 * 24 * 1000));
@@ -94,4 +100,6 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
   ngOnDestroy() {
     this.onDestroy.next();
   }
+
+
 }

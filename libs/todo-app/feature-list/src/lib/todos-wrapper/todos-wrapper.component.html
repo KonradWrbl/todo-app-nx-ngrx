@@ -1,6 +1,6 @@
-<div class="list">
+<div class="list" *ngIf="(undoneTodos$ | async)?.length; else noTodos">
   <div mat-subheader>To do:</div>
-  <mat-action-list *ngIf="(undoneTodos$ | async)?.length; else noTodos">
+  <mat-action-list>
     <todo-app-todo-item
       mat-list-item
       *ngFor="let todo of undoneTodos$ | async"
@@ -15,10 +15,9 @@
   Add
 </button>
 
-
-<div class="list">
+<div class="list" *ngIf="(doneTodos$ | async)?.length">
   <div mat-subheader>Done:</div>
-  <mat-action-list *ngIf="(doneTodos$ | async)?.length; else noTodos">
+  <mat-action-list>
     <todo-app-todo-item
       mat-list-item
       *ngFor="let todo of doneTodos$ | async"
@@ -28,8 +27,6 @@
     ></todo-app-todo-item>
   </mat-action-list>
 </div>
-
-
 
 <ng-template #noTodos>
   <mat-action-list>

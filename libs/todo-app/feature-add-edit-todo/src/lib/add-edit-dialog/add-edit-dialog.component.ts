@@ -46,7 +46,7 @@ export class AddEditDialogComponent implements OnDestroy {
     private store: Store<TodoEntity>
   ) {
     this.form = this.fb.group({
-      name: [data && data.name, [Validators.required, Validators.minLength(5)]],
+      name: [data && data.name, [Validators.required, Validators.minLength(5), Validators.maxLength(20)]],
       description: [data && data.description, [Validators.required]],
       deadline: [data && data.deadline, [Validators.required]],
     });
