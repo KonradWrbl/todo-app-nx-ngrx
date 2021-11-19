@@ -4,7 +4,6 @@ import * as TodoActions from './todo.actions';
 import { TodoService } from '../todo.service';
 import { catchError, map, mergeMap } from 'rxjs/operators';
 import { of } from 'rxjs';
-import { Router } from '@angular/router';
 
 @Injectable()
 export class TodoEffects {
@@ -58,7 +57,5 @@ export class TodoEffects {
 
   constructor(
     private readonly actions$: Actions,
-    private todoService: TodoService,
-    private router: Router
-  ) {}
+    private todoService: TodoService,) {}
 }
