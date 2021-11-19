@@ -1,6 +1,5 @@
 import { createAction, props } from '@ngrx/store';
 import { TodoEntity } from './todo.models';
-import { Update } from '@ngrx/entity';
 
 //load todo
 
@@ -19,7 +18,7 @@ export const loadTodoSuccess = createAction(
 
 export const loadTodoFailure = createAction(
   LoadTodoActionTypes.LOAD_TODO_FAIL,
-  props<{ error: any }>()
+  props<{ error: void }>()
 );
 
 //create todo
@@ -42,7 +41,7 @@ export const createTodoSuccess = createAction(
 
 export const createTodoFail = createAction(
   CreateTodoActionTypes.CREATE_TODO_FAIL,
-  props<{ error: any }>()
+  props<{ error: void }>()
 );
 
 //remove todo
@@ -64,7 +63,7 @@ export const removeTodoSuccess = createAction(
 
 export const removeTodoFail = createAction(
   RemoveTodoActionTypes.REMOVE_TODO_FAIL,
-  props<{ error: any }>()
+  props<{ error: void }>()
 );
 
 export enum RemoveTodoActionTypes {
@@ -84,7 +83,7 @@ export const editTodoSuccess = createAction(
 
 export const editTodoFail = createAction(
   RemoveTodoActionTypes.EDIT_TODO_FAIL,
-  props<{ error: any }>()
+  props<{ error: void }>()
 );
 
 
