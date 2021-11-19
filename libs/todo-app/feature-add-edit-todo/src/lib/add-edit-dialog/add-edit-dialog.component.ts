@@ -11,8 +11,6 @@ import {
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { TodoService } from '../../../../data-access/src/lib/todo.service';
-import { takeUntil } from 'rxjs/operators';
 import { Subject } from 'rxjs';
 import { Store } from '@ngrx/store';
 
@@ -27,15 +25,15 @@ export class AddEditDialogComponent implements OnDestroy {
   minDate: Date = new Date();
   form: FormGroup;
 
-  get name() {
+  get name(): FormControl {
     return this.form.get('name') as FormControl;
   }
 
-  get description() {
+  get description(): FormControl {
     return this.form.get('description') as FormControl;
   }
 
-  get deadline() {
+  get deadline(): FormControl {
     return this.form.get('deadline') as FormControl;
   }
 
@@ -71,7 +69,7 @@ export class AddEditDialogComponent implements OnDestroy {
     }
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.onDestroy.next();
   }
 }

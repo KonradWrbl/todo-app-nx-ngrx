@@ -26,17 +26,17 @@ export class TodosWrapperComponent implements OnInit {
     this.todos$ = this.store.pipe(select(getAllTodo));
   }
 
-  addTodo() {
+  addTodo(): void {
     this.dialog.open(AddEditDialogComponent);
   }
 
-  editTodo(todo: TodoEntity) {
+  editTodo(todo: TodoEntity): void {
     this.dialog.open(AddEditDialogComponent, {
       data: todo,
     });
   }
 
-  deleteTodo(id: string | number) {
+  deleteTodo(id: string | number): void {
     this.store.dispatch(removeTodo({ id }));
   }
 }

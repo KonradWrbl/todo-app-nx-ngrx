@@ -11,12 +11,12 @@ export class TodoItemComponent {
   @Output() deleteTodo = new EventEmitter<number | string>();
   @Output() editTodo = new EventEmitter<void>();
 
-  deleteTodoHandler(event: MouseEvent) {
+  deleteTodoHandler(event: MouseEvent): void {
     event.stopPropagation()
     this.todo && this.deleteTodo.emit(this.todo?._id);
   }
 
-  editTodoHandler(event: MouseEvent) {
+  editTodoHandler(event: MouseEvent): void {
     event.stopPropagation()
     this.todo && this.editTodo.emit()
   }

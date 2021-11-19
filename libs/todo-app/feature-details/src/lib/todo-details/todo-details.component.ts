@@ -64,20 +64,20 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     );
   }
 
-  editTodo(todo: TodoEntity) {
+  editTodo(todo: TodoEntity): void {
     this.dialog.open(AddEditDialogComponent, {
       data: todo,
     });
   }
 
-  deleteTodo(id: string | number) {
+  deleteTodo(id: string | number): void {
     this.store.dispatch(removeTodo({ id }));
     this.store
       .pipe(select(getTodoLoaded), takeUntil(this.onDestroy))
       .subscribe((res) => res && this.router.navigate(['/']));
   }
 
-  getDateDifference(startDate: Date, endDate: Date) {
+  getDateDifference(startDate: Date, endDate: Date): DateDiffModel {
     const diff = endDate.getTime() - startDate.getTime();
     const days = Math.floor(diff / (60 * 60 * 24 * 1000));
     const hours = Math.floor(diff / (60 * 60 * 1000)) - days * 24;
@@ -86,7 +86,7 @@ export class TodoDetailsComponent implements OnInit, OnDestroy {
     return { days, hours, minutes };
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.onDestroy.next();
   }
 }
