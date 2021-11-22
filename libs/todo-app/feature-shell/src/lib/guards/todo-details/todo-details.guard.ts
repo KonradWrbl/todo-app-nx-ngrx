@@ -16,13 +16,7 @@ import { map } from 'rxjs/operators';
 })
 export class TodoDetailsGuard implements CanActivate {
   constructor(private store: Store<TodoEntity>, private router: Router) {}
-  canActivate(
-    route: ActivatedRouteSnapshot
-  ):
-    | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree>
-    | boolean
-    | UrlTree {
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean | UrlTree> {
     return this.store.pipe(
       select(selectTodoById(route.params.id)),
       map((res) => {
